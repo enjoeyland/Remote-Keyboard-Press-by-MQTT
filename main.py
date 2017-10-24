@@ -1,13 +1,13 @@
 import json
 import paho.mqtt.client as mqtt
 
-from config import IP, PORT, TOPIC_AP
+from config import IP, PORT, TOPIC_AK, TOPIC_KA
 from mqttCallback import MqttCallback
 
 
 def main():
     mqttClient = mqtt.Client()
-    mMqttCallback = MqttCallback()
+    mMqttCallback = MqttCallback(mqttClient)
 
     mqttClient.on_connect = mMqttCallback.on_connect
     mqttClient.on_message = mMqttCallback.on_message
@@ -18,9 +18,9 @@ def main():
     mqttClient.connect(IP, port = PORT, keepalive = 30)
     # client.connect("117.16.136.159", 1883, 30)
 
-    mqttClient.subscribe(TOPIC_AP)
+    mqttClient.subscribe(TOPIC_AK)
 
-    mqttClient.publish(TOPIC_AP, json.dumps({"clientId" : 0,"state":0}))
+    # mqttClient.publish(TOPIC_AK, json.dumps({"clientId" : 0,"state":0}))
 
     mqttClient.loop_forever()
 

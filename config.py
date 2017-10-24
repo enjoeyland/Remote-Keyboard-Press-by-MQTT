@@ -3,15 +3,22 @@ DEBUG = True
 # IP = "192.168.123.100"
 IP = "127.0.0.1"
 PORT = 1883
-TOPIC_AP = "whimoon_control_ap"
+
+
+#subscribe topic
+TOPIC_AK = "whimoonControlApp2keyboardController"
+TOPIC_KA = "keyboardController2whimoonControlApp"
+
 
 MAXIMUM_PLAYER_NUM = 2
 MINIMUM_PLAYER_NUM = 2
-# MESSAGE_FORMAT = 'si' #str, int
 
+
+#publish purpose
 START_CONNECT = 0
 END_CONNECT = 1
 ACTION = 2
+
 
 #click type
 UP = 0
@@ -19,7 +26,15 @@ DOWN = 1
 BUTTON = 2
 
 
-VK_CODE = { #virtual key
+#notify msg
+OPPOSITE_PLAYER_DISCONNECT_MSG = 0
+PLAYER_IS_NOT_ENOUGH_MSG = 1
+CLIENT_NUM_UPDATED_MSG = 2
+YOUR_NOW_PLAYER_MSG = 3
+
+
+#virtual key
+VK_CODE = {
 	'backspace':0x08,
 	'tab':0x09,
 	'clear':0x0C,

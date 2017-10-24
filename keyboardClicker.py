@@ -1,6 +1,6 @@
 import win32api
 
-from config import VK_CODE, DOWN, UP, BUTTON
+from config import DOWN, UP, BUTTON, VK_CODE
 
 tmpKeyP0 = []
 tmpKeyP1 = []
@@ -22,14 +22,14 @@ class KeyboardClicker:
             self.buttonClick(virtualKey)
 
     def keydown(self, virtualKey):
-        win32api.keybd_event(virtualKey, 0, 0, 0)
+        win32api.keybd_event(VK_CODE[virtualKey], 0, 0, 0)
 
     def keyup(self, virtualKey):
-        win32api.keybd_event(virtualKey, 0, 2, 0)
+        win32api.keybd_event(VK_CODE[virtualKey], 0, 2, 0)
 
     def buttonClick(self, virtualKey):
-        win32api.keybd_event(virtualKey, 0, 0, 0)
-        win32api.keybd_event(virtualKey, 0, 2, 0)
+        win32api.keybd_event(VK_CODE[virtualKey], 0, 0, 0)
+        win32api.keybd_event(VK_CODE[virtualKey], 0, 2, 0)
 
 # def KeyboardClick(playerId, vk):
 #     if len(vk) == 2:

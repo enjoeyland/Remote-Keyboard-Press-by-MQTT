@@ -1,11 +1,8 @@
-import time
-import win32con
-import win32api
 import json
-import logging
+
 
 from clientManager import ClientManager
-from config import TOPIC_AP, VK_CODE, MAXIMUM_PLAYER_NUM, END_CONNECT, ACTION
+from config import TOPIC_AP, MAXIMUM_PLAYER_NUM, END_CONNECT, ACTION
 from keyboardClicker import KeyboardClicker
 from notifyToClient import NotifyToClient
 from playerManager import PlayerManager
@@ -13,10 +10,10 @@ from playerManager import PlayerManager
 
 
 class MqttCallback:
-    def __init__(self):
+    def __init__(self, mqttClient):
         self.mClientManager = ClientManager()
         self.mPlayerManager = PlayerManager(self.mClientManager)
-        self.mNotifyToClient = NotifyToClient()
+        self.mNotifyToClient = NotifyToClient(mqttClient)
         self.mKeyboardClicker = KeyboardClicker()
 
     def on_connect(self, client, userdata, flags, rc):
@@ -47,7 +44,7 @@ class MqttCallback:
             self.mNotifyToClient.updateClientNum()
 
         if self.mPlayerManager.isPlayer(clientId) == True:
-            if message["state"] == END_CONNECT:
+            if message["purpose"] == END_CONNECT:
                 self.mClientManager.removeClient(clientId)
                 self.mNotifyToClient.notifyOppositePlayerDisconnect()
                 self.mNotifyToClient.updateClientNum()
@@ -57,11 +54,11 @@ class MqttCallback:
                 else:
                     self.mNotifyToClient.notifyPlayerIsNotEnough()
 
-            elif message["state"] == ACTION:
+            elif message["purpose"] == ACTION:
                 self.mKeyboardClicker.clickBroker(message["virtualKey"], message["clickType"])
 
         else:
-            if message["state"] == END_CONNECT:
+            if message["purpose"] == END_CONNECT:
                 self.mClientManager.removeClient(clientId)
 
 

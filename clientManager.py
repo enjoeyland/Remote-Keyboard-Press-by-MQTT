@@ -2,6 +2,7 @@ class ClientManager:
     def __init__(self):
         self.clientList = []
         self.clientNum = 0
+
     def appendNewClient(self, clientId):
         self.clientList.append(clientId)
         self.clientNum += 1
