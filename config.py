@@ -1,11 +1,25 @@
+DEBUG = True
+
+# IP = "192.168.123.100"
+IP = "127.0.0.1"
+PORT = 1883
 TOPIC_AP = "whimoon_control_ap"
-IP = "192.168.123.100"
 
-playerIdList = []
-playerDic = {}
-playerCursor = 0
+MAXIMUM_PLAYER_NUM = 2
+MINIMUM_PLAYER_NUM = 2
+# MESSAGE_FORMAT = 'si' #str, int
 
-VK_CODE = {
+START_CONNECT = 0
+END_CONNECT = 1
+ACTION = 2
+
+#click type
+UP = 0
+DOWN = 1
+BUTTON = 2
+
+
+VK_CODE = { #virtual key
 	'backspace':0x08,
 	'tab':0x09,
 	'clear':0x0C,
