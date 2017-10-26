@@ -2,13 +2,7 @@ import win32api
 
 from config import DOWN, UP, BUTTON, VK_CODE
 
-tmpKeyP0 = []
-tmpKeyP1 = []
-tmpKey = [tmpKeyP0, tmpKeyP1]
 
-playerIdList = []
-playerDic = {}
-playerCursor = 0
 
 class KeyboardClicker:
     def __init__(self):
@@ -31,6 +25,14 @@ class KeyboardClicker:
         win32api.keybd_event(VK_CODE[virtualKey], 0, 0, 0)
         win32api.keybd_event(VK_CODE[virtualKey], 0, 2, 0)
 
+
+# tmpKeyP0 = []
+# tmpKeyP1 = []
+# tmpKey = [tmpKeyP0, tmpKeyP1]
+#
+# playerIdList = []
+# playerDic = {}
+# playerCursor = 0
 # def KeyboardClick(playerId, vk):
 #     if len(vk) == 2:
 #         item1, item2 = vk

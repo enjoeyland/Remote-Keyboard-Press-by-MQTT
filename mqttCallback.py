@@ -2,7 +2,7 @@ import json
 
 
 from clientManager import ClientManager
-from config import TOPIC_AP, MAXIMUM_PLAYER_NUM, END_CONNECT, ACTION
+from config import MAXIMUM_PLAYER_NUM, END_CONNECT, ACTION, TOPIC_AK
 from keyboardClicker import KeyboardClicker
 from notifyToClient import NotifyToClient
 from playerManager import PlayerManager
@@ -17,13 +17,14 @@ class MqttCallback:
         self.mKeyboardClicker = KeyboardClicker()
 
     def on_connect(self, client, userdata, flags, rc):
-        print("on_connect", client, userdata, flags, rc)
-        print("Connection on Success")
+        # print("on_connect", client, userdata, flags, rc)
+        if rc == 0: #Successful
+            print("Connection on Success")
         print("my client id -", client)
 
     def on_message(self, client, userdata, msg):
         # print("on_message",client, userdata, msg)
-        print(msg.payload.decode("utf-8"), "-", client)
+        print("message -", msg.payload.decode("utf-8"))
 
         # message = msg.payload.decode('utf-8')
         message = json.loads(msg.payload.decode("utf-8"))
@@ -39,7 +40,7 @@ class MqttCallback:
         # String uniqueID = UUID.randomUUID().toString(); #java android unique Id
 
         if self.mClientManager.isNewClient(clientId):
-            print("new client connected" + clientId)
+            print("new client connected -",  clientId)
             self.mClientManager.appendNewClient(clientId)
             self.mNotifyToClient.updateClientNum()
 
@@ -55,6 +56,8 @@ class MqttCallback:
                     self.mNotifyToClient.notifyPlayerIsNotEnough()
 
             elif message["purpose"] == ACTION:
+                if not self.mPlayerManager.isPlayerIsEnough():
+                    self.mNotifyToClient.notifyPlayerIsNotEnough()
                 self.mKeyboardClicker.clickBroker(message["virtualKey"], message["clickType"])
 
         else:
@@ -88,7 +91,7 @@ class MqttCallback:
 
     def on_subscribe(self, client, userdata, mid, granted_qos):
         # print("on_subscribe",client, userdata, mid, granted_qos)
-        print("Subscribed to",TOPIC_AP)
+        print("Subscribed to",TOPIC_AK)
 
     def on_unsubscribe(self, client, userdata, mid):
         # if self.mPlayerManager.isPlayer(client) == True:
@@ -107,8 +110,8 @@ class MqttCallback:
 
     def on_publish(self, client, userdata, mid):
         # print("on_publish",client, userdata, mid)
-        print("published")
-
+        # print("published")
+        pass
 
 # def removeByteFromMessage(message):
 #     return str(message)[2:-1]

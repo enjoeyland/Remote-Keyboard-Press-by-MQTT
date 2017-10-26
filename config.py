@@ -140,7 +140,7 @@ VK_CODE = {
 	'num_lock':0x90,
 	'scroll_lock':0x91,
 	'left_shift':0xA0,
-	'right_shift ':0xA1,
+	'right_shift':0xA1,
 	'left_control':0xA2,
 	'right_control':0xA3,
 	'left_menu':0xA4,
@@ -153,7 +153,7 @@ VK_CODE = {
 	'browser_favorites':0xAB,
 	'browser_start_and_home':0xAC,
 	'volume_mute':0xAD,
-	'volume_Down':0xAE,
+	'volume_down':0xAE,
 	'volume_up':0xAF,
 	'next_track':0xB0,
 	'previous_track':0xB1,
@@ -179,6 +179,5 @@ VK_CODE = {
 	'[':0xDB,
 	'\\':0xDC,
 	']':0xDD,
-	"'":0xDE,
-	'`':0xC0
+	"'":0xDE
 }

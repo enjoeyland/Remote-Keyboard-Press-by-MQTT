@@ -1,8 +1,10 @@
 import json
 import paho.mqtt.client as mqtt
+import time
 
-from config import IP, PORT, TOPIC_AK, TOPIC_KA
+from config import IP, PORT, TOPIC_AK
 from mqttCallback import MqttCallback
+from testCase import TestCase
 
 
 def main():

@@ -6,13 +6,16 @@ class ClientManager:
     def appendNewClient(self, clientId):
         self.clientList.append(clientId)
         self.clientNum += 1
+        print(self.clientList, self.clientNum)
 
     def removeClient(self, clientId):
         self.clientList.remove(clientId)
         self.clientNum -= 1
+        print(self.clientList, self.clientNum)
+
 
     def isNewClient(self, clientId):
         if clientId in self.clientList:
-            return True
-        else:
             return False
+        else:
+            return True
